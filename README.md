@@ -12,6 +12,7 @@ brew install python@3.10
 
 ## Package & Project Manager
 
+PDM and Poetry can share the same ```pyproject.toml``` file.
 ### PDM
 
 [Documentation](https://pdm-project.org/latest/)
@@ -57,6 +58,10 @@ poetry init
 poetry run python main.py --example types-hint
 ```
 
+```shell
+poetry run jupyter notebook
+```
+
 ## Main.py
 
 Run it with:
@@ -73,14 +78,39 @@ pdm run jupyter notebook
 
 ## Logging setup to stdout and log file
 
+See ```setup_logging()``` in ```main.py```.
+
 ## Command-line arguments parsing
+
+See ```parser.parse_args()``` in ```main.py```.
 
 ## Registry of "callable" functions
 
+See ```register_examples()``` in ```./examples/registry/registry.py``` for the use if the ```Callable``` generic.
+
 ## Type Hints
+
+See ```run_examples()``` in ```./examples/typehints/type_hints_example.py```.
+
+## Unit Tests
+
+### PyTest
+
+#### Install
+
+```shell
+poetry install pytest
+```
+
+#### Usage
+
+```shell
+poetry run python -m pytest
+```
+
 
 ## TODO
 
-### PDM vs. Poetry Package Manager
-### Unit tests
-### 
+### Classes
+### Generics
+### Basic Web server

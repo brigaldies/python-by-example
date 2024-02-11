@@ -23,20 +23,22 @@ def setup_logging() -> None:
 
 def main(cli_args):
     setup_logging()
-    registered_examples: dict[str, Callable[[bool], None]] = registry.register_examples()
+    # registered_examples: dict[str, Callable[[bool], None]] = registry.register_examples()
 
     logging.info("Hello Python examples")
 
+    registered_examples = registry.Registry()
+
     logging.info(f"Example: {cli_args.example}")
 
-    if cli_args.example not in registered_examples:
+    if not registered_examples.is_registered(cli_args.example):
         logging.error(f"Unregistered example {cli_args.example}")
         exit(1)
     else:
         logging.info(f"Running example '{cli_args.example}'")
 
     # type_hints_example.run_examples()
-    registered_examples[cli_args.example](True)
+    registered_examples.run_example(cli_args.example, True)
 
 
 if __name__ == "__main__":
