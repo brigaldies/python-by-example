@@ -10,7 +10,22 @@ Install it on a Mac with:
 brew install python@3.10
 ```
 
-## PDM Package & Project Manager
+## Package & Project Manager
+
+### PDM
+
+[Documentation](https://pdm-project.org/latest/)
+
+#### Install
+
+```shell
+brew install pdm
+```
+
+Notes:
+- brew also installed python@3.12 as a [PDM](https://formulae.brew.sh/formula/pdm#default) dependency
+
+#### Usage
 
 ```shell
 pdm init
@@ -18,14 +33,43 @@ pdm add jupyter
 pdm install
 ```
 
+### Poetry
+
+[Documentation](https://python-poetry.org/docs/#installing-with-pipx)
+
+#### Install
+
+```shell
+brew install pipx
+pipx install poetry
+pipx ensurepath
+# open new terminal
+poetry -h
+```
+
+#### Usage
+
+```shell
+poetry init
+```
+
+```shell
+poetry run python main.py --example types-hint
+```
+
 ## Main.py
 
 Run it with:
 ```shell
-python -m main --example type-hints
+pdm run main.py --example type-hints
 ```
 
 ## Jupyter notebook
+
+Run it with:
+```shell
+pdm run jupyter notebook
+```
 
 ## Logging setup to stdout and log file
 
@@ -37,5 +81,6 @@ python -m main --example type-hints
 
 ## TODO
 
-### Package management with PDM
+### PDM vs. Poetry Package Manager
+### Unit tests
 ### 

@@ -14,7 +14,7 @@ def setup_logging() -> None:
     stdout_handler.setFormatter(logging_format)
     logger.addHandler(stdout_handler)
 
-    file_handler = logging.FileHandler("main.log", mode='w')
+    file_handler = logging.FileHandler("./logs/main.log", mode='w')
     file_handler.setFormatter(logging_format)
     logger.addHandler(file_handler)
 
