@@ -108,6 +108,19 @@ poetry install pytest
 poetry run python -m pytest
 ```
 
+## Linter
+
+### Install
+
+```shell
+pipx install pylint
+```
+
+### Usage
+
+```shell
+pylint **/*.py 
+```
 
 ## TODO
 

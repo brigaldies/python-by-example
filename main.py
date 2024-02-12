@@ -1,11 +1,17 @@
+"""
+This is the main of the project.
+"""
 import argparse
 import logging
 import sys
-from typing import Callable
 from examples.registry import registry
 
 
 def setup_logging() -> None:
+    """
+    Setup the logging for the project.
+    :return: None.
+    """
     logging_format = logging.Formatter("%(asctime)s | %(levelname)s | %(name).8s | %(message)s")
     logger = logging.getLogger()
     logger.setLevel(level=logging.INFO)
@@ -18,10 +24,15 @@ def setup_logging() -> None:
     file_handler.setFormatter(logging_format)
     logger.addHandler(file_handler)
 
-    logging.info(f"Logger {logger} set")
+    logging.info("Logger %s set", logger)
 
 
 def main(cli_args):
+    """
+    Project's main entry point.
+    :param cli_args: Parsed command-line arguments.
+    :return: None.
+    """
     setup_logging()
     # registered_examples: dict[str, Callable[[bool], None]] = registry.register_examples()
 
@@ -29,13 +40,13 @@ def main(cli_args):
 
     registered_examples = registry.Registry()
 
-    logging.info(f"Example: {cli_args.example}")
+    logging.info("Example: %s", {cli_args.example})
 
     if not registered_examples.is_registered(cli_args.example):
-        logging.error(f"Unregistered example {cli_args.example}")
-        exit(1)
+        logging.error("Unregistered example %s", cli_args.example)
+        sys.exit(1)
     else:
-        logging.info(f"Running example '{cli_args.example}'")
+        logging.info("Running example %s", cli_args.example)
 
     # type_hints_example.run_examples()
     registered_examples.run_example(cli_args.example, True)

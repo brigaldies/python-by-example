@@ -1,3 +1,6 @@
+"""
+Type hints examples.
+"""
 import logging
 
 
@@ -17,6 +20,8 @@ def type_hints_example(debug: bool = False) -> None:
     if debug:
         logging.info("number: int = 1")
     number: int = 1
+    number += 1
+
 
 
 def generate_greetings(name: str, debug: bool = False) -> dict[str, str]:
@@ -32,5 +37,5 @@ def generate_greetings(name: str, debug: bool = False) -> dict[str, str]:
         "evening": f"Good evening {name}",
     }
     if debug:
-        logging.info(f"Greetings: {greetings}")
+        logging.info("Greetings %s", greetings)
     return greetings
