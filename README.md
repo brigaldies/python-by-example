@@ -122,8 +122,38 @@ pipx install pylint
 pylint **/*.py 
 ```
 
+## REST API
+
+### Install
+
+```shell
+poetry add flask
+```
+
+### Run
+
+```shell
+flask --app ./examples/api/resp_api --debug run
+```
+
+### End-points
+
+- [View incomes](http://127.0.0.1:5000/incomes)
+- Add income: Run the Python ```post_income.py``` program as shown below:
+```shell
+poetry run python ./examples/api/post_income.py 
+```
+
+## Web Application
+
+The example uses the [Dash](https://dash.plotly.com/) framework.
+
+### Install
+```shell
+poetry install dash
+```
+
 ## TODO
 
 ### Classes
 ### Generics
-### Basic Web server
