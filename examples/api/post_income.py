@@ -2,9 +2,9 @@
 Post an income
 """
 import logging
-import sys
 
 import requests
+from examples.app_logging import app_logging
 
 
 def post_income() -> None:
@@ -24,12 +24,5 @@ def post_income() -> None:
 
 
 if __name__ == "__main__":
-    logging_format = logging.Formatter("%(asctime)s | %(levelname)s | %(name).8s | %(message)s")
-    logger = logging.getLogger()
-    logger.setLevel(level=logging.INFO)
-
-    stdout_handler = logging.StreamHandler(sys.stdout)
-    stdout_handler.setFormatter(logging_format)
-    logger.addHandler(stdout_handler)
-
+    app_logging.setup_logging()
     post_income()

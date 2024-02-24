@@ -146,14 +146,25 @@ poetry run python ./examples/api/post_income.py
 
 ## Web Application
 
-The example uses the [Dash](https://dash.plotly.com/) framework.
+The example uses the [Dash](https://dash.plotly.com/) framework, and [tutorial](https://dash.plotly.com/tutorial).
 
 ### Install
 ```shell
 poetry install dash
 ```
 
+### Run
+
+First, add the Dash's application location to PYTHONPATH, for example:
+```shell
+-> % export PYTHONPATH="${PYTHONPATH}:/Users/bertrandrigaldies/Projects/python-by-example"
+```
+
+Then, run the Dash application:
+```shell
+poetry run python ./examples/web_app/app_with_bootstrap_styling.py
+```
+
 ## TODO
 
-### Classes
 ### Generics
