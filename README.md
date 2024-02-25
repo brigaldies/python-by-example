@@ -155,7 +155,7 @@ poetry install dash
 
 ### Run
 
-First, add the Dash's application location to PYTHONPATH, for example:
+First, add the Dash's application location to PYTHONPATH, so that the Dash application has access to modules under ./examples, for example:
 ```shell
 -> % export PYTHONPATH="${PYTHONPATH}:/Users/bertrandrigaldies/Projects/python-by-example"
 ```
@@ -168,3 +168,5 @@ poetry run python ./examples/web_app/app_with_bootstrap_styling.py
 ## TODO
 
 ### Generics
+### Async programming
+### Multi-threading programming with greenlets

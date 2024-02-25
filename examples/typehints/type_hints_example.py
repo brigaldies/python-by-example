@@ -1,16 +1,17 @@
 """
 Type hints examples.
 """
+import argparse
 import logging
 
 
-def run_examples(debug: bool = False) -> None:
+def run_examples(args: argparse.Namespace) -> None:
     """
     Run the type hints examples
     :return:
     """
-    type_hints_example(debug=debug)
-    generate_greetings(name="bertrand", debug=debug)
+    type_hints_example(debug=args.debug)
+    generate_greetings(name="bertrand", debug=args.debug)
 
 
 def type_hints_example(debug: bool = False) -> None:
@@ -21,7 +22,6 @@ def type_hints_example(debug: bool = False) -> None:
         logging.info("number: int = 1")
     number: int = 1
     number += 1
-
 
 
 def generate_greetings(name: str, debug: bool = False) -> dict[str, str]:

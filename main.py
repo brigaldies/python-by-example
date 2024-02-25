@@ -14,8 +14,7 @@ def main(cli_args):
     :param cli_args: Parsed command-line arguments.
     :return: None.
     """
-    app_logging.setup_logging()
-    # registered_examples: dict[str, Callable[[bool], None]] = registry.register_examples()
+    app_logging.setup_logging(cli_args.debug)
 
     logging.info("Hello Python examples")
 
@@ -29,12 +28,18 @@ def main(cli_args):
     else:
         logging.info("Running example %s", cli_args.example)
 
-    # type_hints_example.run_examples()
-    registered_examples.run_example(cli_args.example, True)
+    registered_examples.run_example(cli_args)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Explore Python with examples')
     parser.add_argument('-e', '--example', type=str, help="Example name", required=True)
+    parser.add_argument("-d", "--debug", type=bool, default=False)
+
+    # Specific example args
+    # Async io
+    parser.add_argument("-p", "--nprod", type=int, default=5)
+    parser.add_argument("-c", "--ncon", type=int, default=10)
+
     args = parser.parse_args()
     main(args)
