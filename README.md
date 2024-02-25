@@ -212,7 +212,7 @@ poetry install dash
 ### Run
 
 ```shell
-poetry run python ./examples/web_app/app_with_bootstrap_styling.py
+poetry run python ./apps/web_app/app_with_bootstrap_styling.py
 ```
 
 ## TODO
