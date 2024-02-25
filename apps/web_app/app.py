@@ -4,9 +4,9 @@ Web app for input and visualization
 from dash import Dash, html, dash_table, dcc, callback, Output, Input
 import pandas as pd
 import plotly.express as px
-from examples.app_logging import app_logging
+from app_logging import setup_logging
 
-app_logging.setup_logging()
+setup_logging()
 
 # Incorporate data
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')

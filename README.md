@@ -91,7 +91,7 @@ poetry run jupyter notebook
 Run it with:
 
 ```shell
-pdm run main.py --example type-hints
+pdm run main.py --example type-hints --debug true
 ```
 
 ## Jupyter notebook
@@ -102,9 +102,21 @@ Run it with:
 pdm run jupyter notebook
 ```
 
+## Apps
+
+- api
+- web_app
+- web_crawler
+
+The above apps use the ```app_logging``` module, hence add the Dash's application location to PYTHONPATH before running them, for example:
+
+```shell
+-> % export PYTHONPATH="${PYTHONPATH}:/Users/bertrandrigaldies/Projects/python-by-example"
+```
+
 ## Logging setup to stdout and log file
 
-See ```setup_logging()``` in ```main.py```.
+See ```setup_logging()``` in ```app_logging.py```.
 
 ## Command-line arguments parsing
 
@@ -117,6 +129,22 @@ See ```register_examples()``` in ```./examples/registry/registry.py``` for the u
 ## Type Hints
 
 See ```run_examples()``` in ```./examples/typehints/type_hints_example.py```.
+
+## Async IO
+
+### Installation
+
+```shell
+poetry add aiofiles
+poetry add aiohttp
+```
+
+### Run
+
+```shell
+poetry run python main.py --example async-io --debug true -p 3 -c 2 
+poetry run python main.py --example generators --debug true
+```
 
 ## Unit Tests
 
@@ -183,35 +211,11 @@ poetry install dash
 
 ### Run
 
-First, add the Dash's application location to PYTHONPATH, so that the Dash application has access to modules under
-./examples, for example:
-
-```shell
--> % export PYTHONPATH="${PYTHONPATH}:/Users/bertrandrigaldies/Projects/python-by-example"
-```
-
-Then, run the Dash application:
-
 ```shell
 poetry run python ./examples/web_app/app_with_bootstrap_styling.py
-```
-
-## Async IO
-
-### Installation
-
-```shell
-poetry add aiofiles
-poetry add aiohttp
-```
-
-### Run
-
-```shell
-poetry run python main.py --example async-io --debug true -p 3 -c 2 
-poetry run python main.py --example generators --debug true
 ```
 
 ## TODO
 ### Generics
 ### Multi-threading programming
+### Decorators

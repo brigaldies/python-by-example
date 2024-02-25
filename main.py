@@ -5,7 +5,7 @@ import argparse
 import logging
 import sys
 from examples.registry import registry
-from examples.app_logging import app_logging
+from app_logging import setup_logging
 
 
 def main(cli_args):
@@ -14,7 +14,7 @@ def main(cli_args):
     :param cli_args: Parsed command-line arguments.
     :return: None.
     """
-    app_logging.setup_logging(cli_args.debug)
+    setup_logging(cli_args.debug)
 
     logging.info("Hello Python examples")
 

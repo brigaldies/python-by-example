@@ -4,9 +4,9 @@ A REST API.
 Reference: https://auth0.com/blog/developing-restful-apis-with-python-and-flask/
 """
 from flask import Flask, jsonify, request
-from examples.app_logging import app_logging
+from app_logging import setup_logging
 
-app_logging.setup_logging()
+setup_logging()
 
 app = Flask(__name__)
 
