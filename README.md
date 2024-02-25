@@ -75,7 +75,7 @@ poetry -h
 #### Usage
 
 ```shell
-poetry init
+poetry install
 ```
 
 ```shell

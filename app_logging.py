@@ -2,6 +2,7 @@
 Logging
 """
 import logging
+import os
 import sys
 
 
@@ -21,7 +22,12 @@ def setup_logging(debug: bool = False) -> None:
     stdout_handler.setFormatter(logging_format)
     logger.addHandler(stdout_handler)
 
-    file_handler = logging.FileHandler("./logs/main.log", mode='w')
+    path = "./logs"
+    if not os.path.exists(path):
+        # Create a new directory because it does not exist
+        os.makedirs(path)
+        print(f"Logs directory {path} created.")
+    file_handler = logging.FileHandler(f"{path}/main.log", mode='w')
     file_handler.setFormatter(logging_format)
     logger.addHandler(file_handler)
 
