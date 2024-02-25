@@ -6,6 +6,7 @@ import logging
 from typing import Callable
 from examples.typehints import type_hints_example
 from examples.async_io import async_io_examples
+from examples.generators import generators_examples
 
 
 class Registry:
@@ -17,6 +18,7 @@ class Registry:
         self.registry: dict[str, Callable[[argparse.Namespace], None]] = {
             "type-hints": type_hints_example.run_examples,
             "async-io": async_io_examples.run_examples,
+            "generators": generators_examples.run_examples,
         }
         logging.info("%d examples registered.", len(self.registry))
 

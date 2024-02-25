@@ -16,7 +16,6 @@ def run_examples(args: argparse.Namespace) -> None:
     """
     Run the async IO examples.
     :param args: Command-line arguments.
-    :param debug: Debug flag.
     """
     logging.info("Running async IO examples")
     example_1(args)
