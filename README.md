@@ -1,5 +1,27 @@
 # Examples
 
+## Content
+
+This repo contains examples for:
+
+- PDM and Poetry-based dependencies management.
+- pipx-based installation of poetry and pylint.
+- pylint-based linting.
+- Command-line arguments parsing.
+- Logging.
+- Executing ```Callable``` objects.
+- Type hints.
+- Async IO
+- Jupyter notebook.
+- Dash-based Web application.
+- Flask-based API.
+- pytest-based unit tests.
+
+## IDE
+
+The code in the repo was written, debugged, and executed using JetBrains' [PyCharm](https://www.jetbrains.com/pycharm/) 2023.2.5 (Professional Edition).
+
+
 ## Python requirements
 
 Python 3.10 or above.
@@ -13,6 +35,7 @@ brew install python@3.10
 ## Package & Project Manager
 
 PDM and Poetry can share the same ```pyproject.toml``` file.
+
 ### PDM
 
 [Documentation](https://pdm-project.org/latest/)
@@ -24,6 +47,7 @@ brew install pdm
 ```
 
 Notes:
+
 - brew also installed python@3.12 as a [PDM](https://formulae.brew.sh/formula/pdm#default) dependency
 
 #### Usage
@@ -65,6 +89,7 @@ poetry run jupyter notebook
 ## Main.py
 
 Run it with:
+
 ```shell
 pdm run main.py --example type-hints
 ```
@@ -72,6 +97,7 @@ pdm run main.py --example type-hints
 ## Jupyter notebook
 
 Run it with:
+
 ```shell
 pdm run jupyter notebook
 ```
@@ -140,6 +166,7 @@ flask --app ./examples/api/resp_api --debug run
 
 - [View incomes](http://127.0.0.1:5000/incomes)
 - Add income: Run the Python ```post_income.py``` program as shown below:
+
 ```shell
 poetry run python ./examples/api/post_income.py 
 ```
@@ -149,24 +176,42 @@ poetry run python ./examples/api/post_income.py
 The example uses the [Dash](https://dash.plotly.com/) framework, and [tutorial](https://dash.plotly.com/tutorial).
 
 ### Install
+
 ```shell
 poetry install dash
 ```
 
 ### Run
 
-First, add the Dash's application location to PYTHONPATH, so that the Dash application has access to modules under ./examples, for example:
+First, add the Dash's application location to PYTHONPATH, so that the Dash application has access to modules under
+./examples, for example:
+
 ```shell
 -> % export PYTHONPATH="${PYTHONPATH}:/Users/bertrandrigaldies/Projects/python-by-example"
 ```
 
 Then, run the Dash application:
+
 ```shell
 poetry run python ./examples/web_app/app_with_bootstrap_styling.py
 ```
 
-## TODO
+## Async IO
 
+### Installation
+
+```shell
+poetry add aiofiles
+poetry add aiohttp
+```
+
+### Run
+
+```shell
+poetry run python main.py --example async-io --debug true -p 3 -c 2 
+poetry run python main.py --example generators --debug true
+```
+
+## TODO
 ### Generics
-### Async programming
-### Multi-threading programming with greenlets
+### Multi-threading programming
