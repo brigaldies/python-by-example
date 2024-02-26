@@ -7,6 +7,7 @@ from typing import Callable
 from examples.typehints import type_hints_example
 from examples.async_io import async_io_examples
 from examples.generators import generators_examples
+from examples.decorators import decorators_examples
 
 
 class Registry:
@@ -19,6 +20,7 @@ class Registry:
             "type-hints": type_hints_example.run_examples,
             "async-io": async_io_examples.run_examples,
             "generators": generators_examples.run_examples,
+            "decorators": decorators_examples.run_examples,
         }
         logging.info("%d examples registered.", len(self.registry))
 

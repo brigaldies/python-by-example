@@ -9,7 +9,7 @@ from examples.generators.generator_example_1 import example_1
 
 def run_examples(args: argparse.Namespace) -> None:
     """
-    Run the async IO examples.
+    Run the generators examples.
     :param args: Command-line arguments.
     """
     logging.info("Running generators examples")

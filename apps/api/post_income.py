@@ -4,7 +4,7 @@ Post an income
 import logging
 
 import requests
-from examples.app_logging import app_logging
+from app_logging import setup_logging
 
 
 def post_income() -> None:
@@ -24,5 +24,5 @@ def post_income() -> None:
 
 
 if __name__ == "__main__":
-    app_logging.setup_logging()
+    setup_logging()
     post_income()

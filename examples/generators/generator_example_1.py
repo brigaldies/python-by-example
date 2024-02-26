@@ -2,6 +2,7 @@
 Generator example 1.
 """
 import argparse
+import logging
 from itertools import cycle
 
 
@@ -14,6 +15,7 @@ def example_1(args: argparse.Namespace):
     """
     Run the example.
     """
+    logging.info("Running generator example 1 (args=%s)", vars(args))
     e = endless()
     total = 0
     for i in e:

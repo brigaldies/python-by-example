@@ -1,0 +1,5 @@
+"""
+Plugins registry.
+"""
+
+PLUGINS = {}

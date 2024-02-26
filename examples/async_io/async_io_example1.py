@@ -39,7 +39,7 @@ def example_1(args: argparse.Namespace) -> None:
     """
     Run example 1.
     """
-    logging.info("Running async io example 1")
+    logging.info("Running async io example 1 (args=%s", vars(args))
     start = time.perf_counter()
     asyncio.run(run_example())
     elapsed = time.perf_counter() - start

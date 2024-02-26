@@ -45,7 +45,7 @@ def example_2(args: argparse.Namespace) -> None:
     """
     Runs example 2.
     """
-    logging.info("Running async io example 2")
+    logging.info("Running async io example 2 (args=%s", vars(args))
     random.seed(444)
     r1, r2, r3 = asyncio.run(run_example())
     print()
