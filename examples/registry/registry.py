@@ -4,44 +4,53 @@ Examples registry.
 import argparse
 import logging
 from typing import Callable
-from examples.typehints import type_hints_example
-from examples.async_io import async_io_examples
-from examples.generators import generators_examples
-from examples.decorators import decorators_examples
+
+REGISTRY: dict[str, Callable[[argparse.Namespace], None]] = {}
 
 
-class Registry:
+def register_example(func):
+    """Register a function as an example"""
+    print(f"Registering example \"{func.__name__}\"")
+    REGISTRY[func.__name__] = func
+    return func
+
+
+def example_not_found(args) -> None:
     """
-    The registry of examples.
+    Fallback function when an example is not registered.
+    :param args: Command-line args.
+    :return: None
     """
+    logging.error("Unknown example \"%s\"", args.example)
 
-    def __init__(self):
-        self.registry: dict[str, Callable[[argparse.Namespace], None]] = {
-            "type-hints": type_hints_example.run_examples,
-            "async-io": async_io_examples.run_examples,
-            "generators": generators_examples.run_examples,
-            "decorators": decorators_examples.run_examples,
-        }
-        logging.info("%d examples registered.", len(self.registry))
 
-    def is_registered(self, example: str) -> bool:
-        """
-        Determines whether an example is registered.
+def list_registered_examples() -> int:
+    """
+    List the examples.
+    :return: Number of examples.
+    """
+    if len(REGISTRY) == 0:
+        logging.error("The examples registry is empty.")
+    else:
+        logging.info([key for key, _ in REGISTRY.items()])
+    return len(REGISTRY)
 
-        :param example: Example name
-        :return: True if registered, False otherwise
-        """
-        return self.registry.get(example) is not None and callable(self.registry[example])
 
-    def run_example(self, args) -> None:
-        """
-        Runs an example.
+def run_example(args) -> None:
+    """
+    Runs an example.
 
-        :param args: Parsed command-line args.
-        :param debug: Debug mode.
-        :return: None.
-        """
-        if not self.is_registered(args.example):
-            raise ValueError(f"Example {args.example} is not registered")
+    :param args: Parsed command-line args.
+    :return: None.
+    """
+    REGISTRY.get(args.example, example_not_found)(args)
 
-        self.registry[args.example](args)
+
+def is_registered(example):
+    """
+    Determines if an example is registered.
+    :param example: Example name.
+    :return: True if registered, false otherwise.
+    """
+    example_func = REGISTRY.get(example)
+    return example_func is not None and callable(example_func)

@@ -3,9 +3,11 @@ Type hints examples.
 """
 import argparse
 import logging
+from examples.registry.registry import register_example
 
 
-def run_examples(args: argparse.Namespace) -> None:
+@register_example
+def type_hints(args: argparse.Namespace) -> None:
     """
     Run the type hints examples
     :return:

@@ -1,7 +1,20 @@
 """
 Registry unit tests.
 """
-from examples.registry import registry
+import argparse
+import logging
+
+from examples.registry.registry import register_example, list_registered_examples, is_registered
+
+
+@register_example
+def example(args: argparse.Namespace) -> None:
+    """
+    Test example.
+    :param args: Command-line arguments.
+    :return: None.
+    """
+    logging.info("Test example %s", args)
 
 
 def test_registry() -> None:
@@ -9,6 +22,5 @@ def test_registry() -> None:
     Test the registry.
     :return: None.
     """
-    registered_examples = registry.Registry()
-    assert registered_examples is not None
-    assert registered_examples.is_registered("type-hints")
+    assert list_registered_examples() > 0
+    assert is_registered("example")

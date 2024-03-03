@@ -2,10 +2,18 @@
 This is the main of the project.
 """
 import argparse
+import importlib
 import logging
 import sys
 from examples.registry import registry
 from app_logging import setup_logging
+
+# Import the modules so that they can register themselves via the @register_example decorator.
+# This forced module import is a disadvantage of the decorator-based self-registration mechanism.
+importlib.import_module("examples.typehints.type_hints_examples")
+importlib.import_module("examples.async_io.async_io_examples")
+importlib.import_module("examples.generators.generators_examples")
+importlib.import_module("examples.decorators.decorators_examples")
 
 
 def main(cli_args):
@@ -18,17 +26,18 @@ def main(cli_args):
 
     logging.info("Hello Python examples")
 
-    registered_examples = registry.Registry()
+    if registry.list_registered_examples() == 0:
+        sys.exit(1)
 
-    logging.info("Example: %s", {cli_args.example})
+    logging.info("Requested example: %s", cli_args.example)
 
-    if not registered_examples.is_registered(cli_args.example):
+    if not registry.is_registered(cli_args.example):
         logging.error("Unregistered example %s", cli_args.example)
         sys.exit(1)
     else:
         logging.info("Running example %s", cli_args.example)
 
-    registered_examples.run_example(cli_args)
+    registry.run_example(cli_args)
 
 
 if __name__ == "__main__":

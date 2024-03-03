@@ -4,10 +4,12 @@ Generators examples.
 import argparse
 import logging
 
+from examples.registry.registry import register_example
 from examples.generators.generator_example_1 import example_1
 
 
-def run_examples(args: argparse.Namespace) -> None:
+@register_example
+def generators(args: argparse.Namespace) -> None:
     """
     Run the generators examples.
     :param args: Command-line arguments.
