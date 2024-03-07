@@ -2,7 +2,7 @@
 
 ## Content
 
-This repo contains examples for:
+This repo contains various examples for:
 
 - PDM and Poetry-based dependencies management.
 - pipx-based installation of poetry and pylint.
@@ -16,6 +16,9 @@ This repo contains examples for:
 - Dash-based Web application.
 - Flask-based API.
 - pytest-based unit tests.
+
+I built this repo to become a better Python developer, learn by example, and provide a sort of inventory of working examples 
+I can go back to when I forget how to do something in Python.
 
 ## IDE
 
@@ -218,4 +221,6 @@ poetry run python ./apps/web_app/app_with_bootstrap_styling.py
 ## TODO
 ### Generics
 ### Multi-threading programming
-### Decorators
+### Database ORM
+### Jobs Scheduler
+### Secure API
