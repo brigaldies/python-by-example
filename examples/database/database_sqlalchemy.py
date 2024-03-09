@@ -1,11 +1,13 @@
 """
 Database SQL Database access using the tutorial in https://docs.sqlalchemy.org/en/20/tutorial/index.html
 """
+import importlib
 import logging
 
 import sqlalchemy
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, text, MetaData, Table, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import Session
+from examples.database.model.model import Base
 
 
 def sqlalchemy_version() -> str:
@@ -130,3 +132,48 @@ def database_run_sql_with_orm_session(engine: sqlalchemy.Engine) -> sqlalchemy.S
         for row in results:
             logging.info("row: %s", row)
         return results
+
+
+def database_metadata_create_ddl(engine: sqlalchemy.Engine) -> sqlalchemy.MetaData:
+    """
+    Create a table and return the database's metadata.
+    :param engine: Database engine.
+    :return: Metadata
+    """
+    metadata_obj = MetaData()
+    user_table = Table(
+        "user_account",
+        metadata_obj,
+        Column("id", Integer, primary_key=True),
+        Column("name", String(30), nullable=False),
+        Column("fullname", String, nullable=False)
+    )
+
+    address_table = Table(
+        "address",
+        metadata_obj,
+        Column("id", Integer, primary_key=True),
+        Column("user_id", ForeignKey("user_account.id"), nullable=False),
+        Column("email_address", String, nullable=False),
+    )
+    metadata_obj.create_all(engine)
+    return metadata_obj
+
+
+def database_drop_all_dll(engine: sqlalchemy.Engine, metadata_obj: sqlalchemy.MetaData) -> None:
+    """
+    Drop all DDL.
+    :param engine: Database engine.
+    :param metadata_obj: Metadata object.
+    :return: None.
+    """
+    metadata_obj.drop_all(engine)
+
+
+def database_metadata_create_dll_with_orm(engine: sqlalchemy.Engine) -> None:
+    """
+    Create the DDL the ORM way.
+    :param engine: Database engine.
+    :return: None.
+    """
+    Base.metadata.create_all(engine)

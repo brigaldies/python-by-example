@@ -7,7 +7,8 @@ import logging
 
 from examples.registry.registry import register_example
 from examples.database.database_sqlalchemy import sqlalchemy_version, database_connect, database_run_sql, \
-    database_insert_and_commit, database_run_sql_with_bound_params, database_run_sql_with_orm_session
+    database_insert_and_commit, database_run_sql_with_bound_params, database_run_sql_with_orm_session, \
+    database_metadata_create_ddl, database_drop_all_dll, database_metadata_create_dll_with_orm
 
 
 @register_example
@@ -25,3 +26,6 @@ def sql_database(args: argparse.Namespace) -> None:
     database_insert_and_commit(engine)
     _ = database_run_sql_with_bound_params(engine)
     _ = database_run_sql_with_orm_session(engine)
+    metadata_obj = database_metadata_create_ddl(engine)
+    database_drop_all_dll(engine, metadata_obj)
+    database_metadata_create_dll_with_orm(engine)
