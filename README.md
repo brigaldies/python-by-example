@@ -17,13 +17,14 @@ This repo contains various examples for:
 - Flask-based API.
 - pytest-based unit tests.
 
-I built this repo to become a better Python developer, learn by example, and provide a sort of inventory of working examples 
+I built this repo to become a better Python developer, learn by example, and provide a sort of inventory of working
+examples
 I can go back to when I forget how to do something in Python.
 
 ## IDE
 
-The code in the repo was written, debugged, and executed using JetBrains' [PyCharm](https://www.jetbrains.com/pycharm/) 2023.2.5 (Professional Edition).
-
+The code in the repo was written, debugged, and executed using JetBrains' [PyCharm](https://www.jetbrains.com/pycharm/)
+2023.2.5 (Professional Edition).
 
 ## Python requirements
 
@@ -111,7 +112,8 @@ pdm run jupyter notebook
 - web_app
 - web_crawler
 
-The above apps use the ```app_logging``` module, hence add the Dash's application location to PYTHONPATH before running them, for example:
+The above apps use the ```app_logging``` module, hence add the Dash's application location to PYTHONPATH before running
+them, for example:
 
 ```shell
 -> % export PYTHONPATH="${PYTHONPATH}:/Users/bertrandrigaldies/Projects/python-by-example"
@@ -218,9 +220,22 @@ poetry install dash
 poetry run python ./apps/web_app/app_with_bootstrap_styling.py
 ```
 
+## SQL Database with SQLAlchemy
+
+### Install
+
+```shell
+poetry install sqlalchemy
+```
+
 ## TODO
+
+### Object-Oriented and Interface-based Programming
+
 ### Generics
+
 ### Multi-threading programming
-### Database ORM
+
 ### Jobs Scheduler
+
 ### Secure API

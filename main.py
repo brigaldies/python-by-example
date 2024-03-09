@@ -14,6 +14,7 @@ importlib.import_module("examples.typehints.type_hints_examples")
 importlib.import_module("examples.async_io.async_io_examples")
 importlib.import_module("examples.generators.generators_examples")
 importlib.import_module("examples.decorators.decorators_examples")
+importlib.import_module("examples.database.database_examples")
 
 
 def main(cli_args):
