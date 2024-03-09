@@ -2,4 +2,4 @@
 max-line-length=120
 
 [MESSAGES CONTROL]
-disable=import-error
+disable=import-error, too-few-public-methods, unnecessary-pass, consider-using-generator, broad-exception-caught

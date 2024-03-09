@@ -1,11 +1,11 @@
 """
 Database SQL Database access using the tutorial in https://docs.sqlalchemy.org/en/20/tutorial/index.html
 """
-import importlib
 import logging
 
 import sqlalchemy
-from sqlalchemy import create_engine, text, MetaData, Table, Column, Integer, String, ForeignKey
+from sqlalchemy import create_engine, text, MetaData, Table, Column, Integer, String, ForeignKey, insert, select, \
+    bindparam
 from sqlalchemy.orm import Session
 from examples.database.model.model import Base
 
@@ -41,7 +41,7 @@ def database_connect(connection_string: str) -> sqlalchemy.Engine:
 
 def database_run_sql(engine: sqlalchemy.Engine, sql: str) -> sqlalchemy.Sequence:
     """
-    Connect and run the simplest SQL statement.
+    Connect and run an SQL statement.
     :param engine: Database engine.
     :param sql: Sql Expression.
     :return: SQL statement result.
@@ -106,7 +106,7 @@ def database_insert_and_commit(engine: sqlalchemy.Engine) -> None:
 def database_run_sql_with_bound_params(engine: sqlalchemy.Engine) -> sqlalchemy.Sequence:
     """
     Run a SQL select with "bound" parameters.
-    :param engine: Basebase engine.
+    :param engine: Database engine.
     :return: Results.
     """
     table_name = "test1"
@@ -141,7 +141,7 @@ def database_metadata_create_ddl(engine: sqlalchemy.Engine) -> sqlalchemy.MetaDa
     :return: Metadata
     """
     metadata_obj = MetaData()
-    user_table = Table(
+    _ = Table(
         "user_account",
         metadata_obj,
         Column("id", Integer, primary_key=True),
@@ -149,7 +149,7 @@ def database_metadata_create_ddl(engine: sqlalchemy.Engine) -> sqlalchemy.MetaDa
         Column("fullname", String, nullable=False)
     )
 
-    address_table = Table(
+    _ = Table(
         "address",
         metadata_obj,
         Column("id", Integer, primary_key=True),
@@ -177,3 +177,72 @@ def database_metadata_create_dll_with_orm(engine: sqlalchemy.Engine) -> None:
     :return: None.
     """
     Base.metadata.create_all(engine)
+
+
+def database_metadata_read_table_ddl_from_db(engine: sqlalchemy.Engine) -> sqlalchemy.Table:
+    """
+    Read an existing table's DDL.
+    :param engine: Database engine.
+    :return: Table's DDL.
+    """
+    metadata_obj = Base.metadata
+    test_table = Table("test1", metadata_obj, autoload_with=engine)
+    logging.info("Table: %s", repr(test_table))
+    return test_table
+
+
+def database_insert_record(engine: sqlalchemy.Engine) -> sqlalchemy.Result:
+    """
+    Insert a record.
+    :param engine: Engine.
+    :return: Insert's result.
+    """
+    metadata_obj = Base.metadata
+    user_table = Table("user_account", metadata_obj, autoload_with=engine)
+    stmt = insert(user_table).values(name="spongebob", fullname="Spongebob Squarepants")
+    logging.info("Insert SQL: %s", str(stmt))
+    logging.info("Insert params: %s", stmt.compile().params)
+    with engine.connect() as conn:
+        result = conn.execute(stmt)
+        conn.commit()
+        logging.info("primary key: %s", str(result.inserted_primary_key))
+        logging.info("Rows count inserted: %d", len(result.inserted_primary_key_rows))
+        return result
+
+
+def database_insert_records(engine: sqlalchemy.Engine) -> None:
+    """
+    Insert several records.
+    :param engine: Database engine.
+    :return: None.
+    """
+    metadata_obj = Base.metadata
+    user_table = Table("user_account", metadata_obj, autoload_with=engine)
+    with engine.connect() as conn:
+        result = conn.execute(
+            insert(user_table),
+            [
+                {"name": "sandy", "fullname": "Sandy Cheeks"},
+                {"name": "patrick", "fullname": "Patrick Star"},
+            ],
+        )
+        logging.info("Multi-record insert result: %s", str(result.inserted_primary_key_rows))
+        conn.commit()
+
+    scalar_subq = (
+        select(user_table.c.id)
+        .where(user_table.c.name == bindparam("username"))
+        .scalar_subquery()
+    )
+
+    address_table = Table("address", metadata_obj, autoload_with=engine)
+    with engine.connect() as conn:
+        result = conn.execute(
+            insert(address_table).values(user_id=scalar_subq),
+            [
+                {"username": "spongebob", "email_address": "spongebob@sqlalchemy.org"},
+                {"username": "sandy", "email_address": "sandy@sqlalchemy.org"},
+                {"username": "sandy", "email_address": "sandy@squirrelpower.org"},
+            ],
+        )
+        conn.commit()
