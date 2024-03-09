@@ -15,11 +15,22 @@ This repo contains various examples for:
 - Jupyter notebook.
 - Dash-based Web application.
 - Flask-based API.
+- SQLAlchemy-based SQL Database access.
 - pytest-based unit tests.
 
 I built this repo to become a better Python developer, learn by example, and provide a sort of inventory of working
-examples
-I can go back to when I forget how to do something in Python.
+examples I can go back to when I forget how to do something in Python.
+
+## Code Sources
+
+The code uses and adapts examples and tutorials that I found on the Internet from a variety of sites,
+hence I do not claim any authorship to any of the source code in this repo.
+
+I strive to indicate the examples' sources in the modules' docstring.
+
+## Copyright
+
+There is none.
 
 ## IDE
 

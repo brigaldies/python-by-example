@@ -10,7 +10,7 @@ REGISTRY: dict[str, Callable[[argparse.Namespace], None]] = {}
 
 def register_example(func):
     """Register a function as an example"""
-    print(f"Registering example \"{func.__name__}\"")
+    logging.info("Registering example \"%s\"", func.__name__)
     REGISTRY[func.__name__] = func
     return func
 
@@ -34,6 +34,14 @@ def list_registered_examples() -> int:
     else:
         logging.info([key for key, _ in REGISTRY.items()])
     return len(REGISTRY)
+
+
+def get_registered_examples() -> list[str]:
+    """
+    Return the list of registered example names.
+    :return: List of registered example names.
+    """
+    return [key for key, _ in REGISTRY.items()]
 
 
 def run_example(args) -> None:

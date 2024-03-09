@@ -8,13 +8,19 @@ import sys
 from examples.registry import registry
 from app_logging import setup_logging
 
-# Import the modules so that they can register themselves via the @register_example decorator.
-# This forced module import is a disadvantage of the decorator-based self-registration mechanism.
-importlib.import_module("examples.typehints.type_hints_examples")
-importlib.import_module("examples.async_io.async_io_examples")
-importlib.import_module("examples.generators.generators_examples")
-importlib.import_module("examples.decorators.decorators_examples")
-importlib.import_module("examples.database.database_examples")
+
+def register_examples() -> None:
+    """
+    Load the examples' modules in order to register them.
+    :return: None.
+    """
+    # Import the modules so that they can register themselves via the @register_example decorator.
+    # This forced module import is a disadvantage of the decorator-based self-registration mechanism.
+    importlib.import_module("examples.typehints.type_hints_examples")
+    importlib.import_module("examples.async_io.async_io_examples")
+    importlib.import_module("examples.generators.generators_examples")
+    importlib.import_module("examples.decorators.decorators_examples")
+    importlib.import_module("examples.database.database_examples")
 
 
 def main(cli_args):
@@ -43,13 +49,23 @@ def main(cli_args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Explore Python with examples')
-    parser.add_argument('-e', '--example', type=str, help="Example name", required=True)
+    parser.add_argument('-e', '--example', type=str,
+                        help="run --example show to see the available examples", required=True)
     parser.add_argument("-d", "--debug", type=bool, default=False)
 
     # Specific example args
     # Async io
-    parser.add_argument("-p", "--nprod", type=int, default=5)
-    parser.add_argument("-c", "--ncon", type=int, default=10)
+    parser.add_argument("-p", "--nprod", help="In the async io examples: Number of producers", type=int, default=5)
+    parser.add_argument("-c", "--ncon", help="In the async io examples: Number of consumers", type=int, default=10)
 
     args = parser.parse_args()
+
+    register_examples()
+
+    if args.example == "show":
+        print("Examples:")
+        for example in registry.get_registered_examples():
+            print(example)
+        sys.exit(0)
+
     main(args)
