@@ -9,6 +9,8 @@ from sqlalchemy import create_engine, text, MetaData, Table, Column, Integer, St
 from sqlalchemy.orm import Session
 from examples.database.model.model import Base
 
+LOG = logging.getLogger("examples")
+
 
 def sqlalchemy_version() -> str:
     """
@@ -16,7 +18,7 @@ def sqlalchemy_version() -> str:
     :return: SQLAlchemy version.
     """
     version = sqlalchemy.__version__
-    logging.info("SQLAlchemy version: %s", version)
+    LOG.info("SQLAlchemy version: %s", version)
     return version
 
 
@@ -35,7 +37,7 @@ def database_connect(connection_string: str) -> sqlalchemy.Engine:
     """
     engine = create_engine(connection_string, echo=False)
     assert engine is not None
-    logging.info("Database engine created")
+    LOG.info("Database engine created")
     return engine
 
 
@@ -49,7 +51,7 @@ def database_run_sql(engine: sqlalchemy.Engine, sql: str) -> sqlalchemy.Sequence
     with engine.connect() as conn:
         sql_result = conn.execute(text(sql))
         results = sql_result.all()
-        logging.info("Result: %s", results)
+        LOG.info("Result: %s", results)
         return results
 
 
@@ -86,21 +88,21 @@ def database_insert_and_commit(engine: sqlalchemy.Engine) -> None:
 
         # The most Python-esque
         for x, y in results:
-            logging.info("x=%d, y=%d", x, y)
+            LOG.info("x=%d, y=%d", x, y)
 
         # Positional
         for row in results:
-            logging.info("x=%d, y=%d", row[0], row[1])
+            LOG.info("x=%d, y=%d", row[0], row[1])
 
         # Tuple attribute name
         for row in results:
-            logging.info("x=%d, y=%d", row.x, row.y)
+            LOG.info("x=%d, y=%d", row.x, row.y)
 
         # Via a map
         # Fetch the results again so that we can map them.
         result = conn.execute(text(f"select * from {table_name}"))
         for row in result.mappings():
-            logging.info("x=%d, y=%d", row['x'], row['y'])
+            LOG.info("x=%d, y=%d", row['x'], row['y'])
 
 
 def database_run_sql_with_bound_params(engine: sqlalchemy.Engine) -> sqlalchemy.Sequence:
@@ -114,7 +116,7 @@ def database_run_sql_with_bound_params(engine: sqlalchemy.Engine) -> sqlalchemy.
         result = conn.execute(text(f"SELECT x, y FROM {table_name} WHERE y > :y"), {"y": 2})
         results = result.all()
         for row in results:
-            logging.info("row: %s", row)
+            LOG.info("row: %s", row)
         return results
 
 
@@ -130,7 +132,7 @@ def database_run_sql_with_orm_session(engine: sqlalchemy.Engine) -> sqlalchemy.S
         result = session.execute(stmt, {"y": 6})
         results = result.all()
         for row in results:
-            logging.info("row: %s", row)
+            LOG.info("row: %s", row)
         return results
 
 
@@ -187,7 +189,7 @@ def database_metadata_read_table_ddl_from_db(engine: sqlalchemy.Engine) -> sqlal
     """
     metadata_obj = Base.metadata
     test_table = Table("test1", metadata_obj, autoload_with=engine)
-    logging.info("Table: %s", repr(test_table))
+    LOG.info("Table: %s", repr(test_table))
     return test_table
 
 
@@ -200,13 +202,13 @@ def database_insert_record(engine: sqlalchemy.Engine) -> sqlalchemy.Result:
     metadata_obj = Base.metadata
     user_table = Table("user_account", metadata_obj, autoload_with=engine)
     stmt = insert(user_table).values(name="spongebob", fullname="Spongebob Squarepants")
-    logging.info("Insert SQL: %s", str(stmt))
-    logging.info("Insert params: %s", stmt.compile().params)
+    LOG.info("Insert SQL: %s", str(stmt))
+    LOG.info("Insert params: %s", stmt.compile().params)
     with engine.connect() as conn:
         result = conn.execute(stmt)
         conn.commit()
-        logging.info("primary key: %s", str(result.inserted_primary_key))
-        logging.info("Rows count inserted: %d", len(result.inserted_primary_key_rows))
+        LOG.info("primary key: %s", str(result.inserted_primary_key))
+        LOG.info("Rows count inserted: %d", len(result.inserted_primary_key_rows))
         return result
 
 
@@ -226,7 +228,7 @@ def database_insert_records(engine: sqlalchemy.Engine) -> None:
                 {"name": "patrick", "fullname": "Patrick Star"},
             ],
         )
-        logging.info("Multi-record insert result: %s", str(result.inserted_primary_key_rows))
+        LOG.info("Multi-record insert result: %s", str(result.inserted_primary_key_rows))
         conn.commit()
 
     scalar_subq = (

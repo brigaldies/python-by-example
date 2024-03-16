@@ -10,6 +10,8 @@ import random
 import threading
 import time
 
+LOG = logging.getLogger("examples")
+
 
 async def make_item(size: int = 5) -> str:
     """
@@ -96,7 +98,7 @@ async def run_example(nprod: int, ncon: int) -> None:
     for c in consumers:
         c.cancel()
 
-    logging.info("Done.")
+    LOG.info("Done.")
 
 
 def example_4(args: argparse.Namespace):
@@ -107,7 +109,7 @@ def example_4(args: argparse.Namespace):
     """
     random.seed(444)
     start = time.perf_counter()
-    logging.info("Running async io example 4: nprod=%d, ncon=%d", args.nprod, args.ncon)
+    LOG.info("Running async io example 4: nprod=%d, ncon=%d", args.nprod, args.ncon)
     asyncio.run(run_example(nprod=args.nprod, ncon=args.ncon))
     elapsed = time.perf_counter() - start
     print(f"[{threading.current_thread().name}] Program completed in {elapsed:0.5f} seconds.")

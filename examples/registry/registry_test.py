@@ -6,6 +6,8 @@ import logging
 
 from examples.registry.registry import register_example, list_registered_examples, is_registered
 
+LOG = logging.getLogger("examples")
+
 
 @register_example
 def example(args: argparse.Namespace) -> None:
@@ -14,7 +16,7 @@ def example(args: argparse.Namespace) -> None:
     :param args: Command-line arguments.
     :return: None.
     """
-    logging.info("Test example %s", args)
+    LOG.info("Test example %s", args)
 
 
 def test_registry() -> None:

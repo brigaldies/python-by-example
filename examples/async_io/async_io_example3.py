@@ -13,6 +13,8 @@ import random
 import threading
 import time
 
+LOG = logging.getLogger("examples")
+
 
 async def part1(n: int) -> str:
     """
@@ -69,7 +71,7 @@ def example_3(args: argparse.Namespace):
     """
     Runs example 3.
     """
-    logging.info("Running async io example 3")
+    LOG.info("Running async io example 3")
     random.seed(444)
     start = time.perf_counter()
     args = [1, 2, 3]

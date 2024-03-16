@@ -8,6 +8,8 @@ import logging
 
 from examples.decorators.decorators import timer
 
+LOG = logging.getLogger("examples")
+
 
 @timer
 def waste_some_time(num_times: int) -> None:
@@ -26,5 +28,5 @@ def example_1(args: argparse.Namespace):
     :param args: Command-line arguments
     :return:
     """
-    logging.info("Running decorator example 1 (args=%s)", vars(args))
+    LOG.info("Running decorator example 1 (args=%s)", vars(args))
     waste_some_time(10)

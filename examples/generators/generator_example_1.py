@@ -5,6 +5,8 @@ import argparse
 import logging
 from itertools import cycle
 
+LOG = logging.getLogger("examples")
+
 
 def endless():
     """Yields 9, 8, 7, 6, 9, 8, 7, 6, ... forever"""
@@ -15,7 +17,7 @@ def example_1(args: argparse.Namespace):
     """
     Run the example.
     """
-    logging.info("Running generator example 1 (args=%s)", vars(args))
+    LOG.info("Running generator example 1 (args=%s)", vars(args))
     e = endless()
     total = 0
     for i in e:

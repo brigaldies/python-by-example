@@ -3,24 +3,24 @@ Logging
 """
 import logging
 import os
-import sys
 
 
-def setup_logging(debug: bool = False) -> None:
+def setup_logging(debug: bool = False) -> logging.Logger:
     """
     Set up the logging for the project.
     :return: None.
     """
+    stdout_handler = logging.StreamHandler()
     logging_format = logging.Formatter("%(asctime)s | %(threadName)s | %(levelname)s | %(name).8s | %(message)s")
-    logger = logging.getLogger()
+    stdout_handler.setFormatter(logging_format)
+
+    logger = logging.getLogger("examples")
+    logger.addHandler(stdout_handler)
+
     if debug:
         logger.setLevel(level=logging.DEBUG)
     else:
         logger.setLevel(level=logging.INFO)
-
-    stdout_handler = logging.StreamHandler(sys.stdout)
-    stdout_handler.setFormatter(logging_format)
-    logger.addHandler(stdout_handler)
 
     path = "./logs"
     if not os.path.exists(path):
@@ -31,4 +31,6 @@ def setup_logging(debug: bool = False) -> None:
     file_handler.setFormatter(logging_format)
     logger.addHandler(file_handler)
 
-    logging.info("Logger %s set", logger)
+    logger.info("Logger %s set", logger)
+
+    return logger

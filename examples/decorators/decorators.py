@@ -9,6 +9,8 @@ import time
 
 from examples.decorators.plugins import PLUGINS
 
+LOG = logging.getLogger("examples")
+
 
 def boiler_plate_decorator(func):
     """
@@ -36,7 +38,7 @@ def timer(func):
         value = func(*args, **kwargs)
         end_time = time.perf_counter()
         run_time = end_time - start_time
-        logging.info("Finished %s() in %.4f secs", func.__name__, run_time)
+        LOG.info("Finished %s() in %.4f secs", func.__name__, run_time)
         return value
 
     return wrapper_timer
@@ -50,9 +52,9 @@ def debug(func):
         args_repr = [repr(a) for a in args]
         kwargs_repr = [f"{k}={repr(v)}" for k, v in kwargs.items()]
         signature = ", ".join(args_repr + kwargs_repr)
-        logging.info("Calling %s(%s)", func.__name__, signature)
+        LOG.info("Calling %s(%s)", func.__name__, signature)
         value = func(*args, **kwargs)
-        logging.info("%s() returned %s", func.__name__, repr(value))
+        LOG.info("%s() returned %s", func.__name__, repr(value))
         return value
 
     return wrapper_debug

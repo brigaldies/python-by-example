@@ -3,7 +3,6 @@ This is the main of the project.
 """
 import argparse
 import importlib
-import logging
 import sys
 from examples.registry import registry
 from app_logging import setup_logging
@@ -21,6 +20,7 @@ def register_examples() -> None:
     importlib.import_module("examples.generators.generators_examples")
     importlib.import_module("examples.decorators.decorators_examples")
     importlib.import_module("examples.database.database_examples")
+    importlib.import_module("examples.interfaces.interface_examples")
 
 
 def main(cli_args):
@@ -29,20 +29,20 @@ def main(cli_args):
     :param cli_args: Parsed command-line arguments.
     :return: None.
     """
-    setup_logging(cli_args.debug)
+    logger = setup_logging(cli_args.debug)
 
-    logging.info("Hello Python examples")
+    logger.info("Hello Python examples")
 
     if registry.list_registered_examples() == 0:
         sys.exit(1)
 
-    logging.info("Requested example: %s", cli_args.example)
+    logger.info("Requested example: %s", cli_args.example)
 
     if not registry.is_registered(cli_args.example):
-        logging.error("Unregistered example %s", cli_args.example)
+        logger.error("Unregistered example %s", cli_args.example)
         sys.exit(1)
     else:
-        logging.info("Running example %s", cli_args.example)
+        logger.info("Running example %s", cli_args.example)
 
     registry.run_example(cli_args)
 

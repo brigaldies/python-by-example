@@ -8,6 +8,8 @@ import logging
 
 from examples.decorators.decorators import slow_down
 
+LOG = logging.getLogger("examples")
+
 
 @slow_down
 def countdown(from_number: int) -> None:
@@ -29,5 +31,5 @@ def example_4(args: argparse.Namespace) -> None:
     :param args: Command-line arguments.
     :return: None
     """
-    logging.info("Running decorator example 4 (args=%s)", vars(args))
+    LOG.info("Running decorator example 4 (args=%s)", vars(args))
     countdown(5)

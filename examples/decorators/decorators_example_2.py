@@ -8,6 +8,8 @@ import logging
 
 from examples.decorators.decorators import debug
 
+LOG = logging.getLogger("examples")
+
 
 @debug
 def make_greeting(name, age=None):
@@ -29,6 +31,6 @@ def example_2(args: argparse.Namespace):
     :param args: Command-line arguments
     :return:
     """
-    logging.info("Running decorator example 2 (args=%s)", vars(args))
+    LOG.info("Running decorator example 2 (args=%s)", vars(args))
     make_greeting("Benjamin")
     make_greeting("Juan", age=114)

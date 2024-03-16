@@ -13,6 +13,8 @@ from examples.decorators.decorators_example_3 import example_3
 from examples.decorators.decorators_example_4 import example_4
 from examples.decorators.decorators_example_5 import example_5
 
+LOG = logging.getLogger("examples")
+
 
 @register_example
 def decorators(args: argparse.Namespace) -> None:
@@ -20,7 +22,7 @@ def decorators(args: argparse.Namespace) -> None:
     Run the decorators examples.
     :param args: Command-line arguments.
     """
-    logging.info("Running decorators examples")
+    LOG.info("Running decorators examples")
     example_1(args)
     example_2(args)
     example_3(args)

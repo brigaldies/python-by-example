@@ -7,6 +7,8 @@ import logging
 import random
 import threading
 
+LOG = logging.getLogger("examples")
+
 # ANSI colors
 c = (
     "\033[0m",  # End of color
@@ -45,7 +47,7 @@ def example_2(args: argparse.Namespace) -> None:
     """
     Runs example 2.
     """
-    logging.info("Running async io example 2 (args=%s)", vars(args))
+    LOG.info("Running async io example 2 (args=%s)", vars(args))
     random.seed(444)
     r1, r2, r3 = asyncio.run(run_example())
     print()

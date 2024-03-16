@@ -5,12 +5,15 @@ import argparse
 import logging
 from typing import Callable
 
+LOG = logging.getLogger("examples")
+
+
 REGISTRY: dict[str, Callable[[argparse.Namespace], None]] = {}
 
 
 def register_example(func):
     """Register a function as an example"""
-    logging.info("Registering example \"%s\"", func.__name__)
+    LOG.info("Registering example \"%s\"", func.__name__)
     REGISTRY[func.__name__] = func
     return func
 
@@ -21,7 +24,7 @@ def example_not_found(args) -> None:
     :param args: Command-line args.
     :return: None
     """
-    logging.error("Unknown example \"%s\"", args.example)
+    LOG.error("Unknown example \"%s\"", args.example)
 
 
 def list_registered_examples() -> int:
@@ -30,9 +33,9 @@ def list_registered_examples() -> int:
     :return: Number of examples.
     """
     if len(REGISTRY) == 0:
-        logging.error("The examples registry is empty.")
+        LOG.error("The examples registry is empty.")
     else:
-        logging.info([key for key, _ in REGISTRY.items()])
+        LOG.info([key for key, _ in REGISTRY.items()])
     return len(REGISTRY)
 
 

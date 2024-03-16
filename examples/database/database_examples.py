@@ -11,6 +11,22 @@ from examples.database.database_sqlalchemy import sqlalchemy_version, database_c
     database_metadata_create_ddl, database_drop_all_dll, database_metadata_create_dll_with_orm, \
     database_metadata_read_table_ddl_from_db, database_insert_record, database_insert_records
 
+LOG = logging.getLogger("examples")
+
+
+def setup_sqlalchemy_logging() -> None:
+    """
+    Set up the SQLAlchemy logging.
+    :return: None.
+    """
+    logger = logging.getLogger("sqlalchemy.engine")
+    logger.setLevel(logging.INFO)
+
+    stdout_handler = logging.StreamHandler()
+    logging_format = logging.Formatter("%(asctime)s | %(threadName)s | %(levelname)s | %(name).8s | %(message)s")
+    stdout_handler.setFormatter(logging_format)
+    logger.addHandler(stdout_handler)
+
 
 @register_example
 def sql_database(args: argparse.Namespace) -> None:
@@ -19,8 +35,10 @@ def sql_database(args: argparse.Namespace) -> None:
     :param args: Command-line args.
     :return: None.
     """
-    logging.info("Running async SQL Database access examples (args=%s)", args)
-    logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
+    LOG.info("Running async SQL Database access examples (args=%s)", args)
+
+    setup_sqlalchemy_logging()
+
     _ = sqlalchemy_version()
     engine = database_connect("sqlite+pysqlite:///:memory:")
     _ = database_run_sql(engine, "select 'hello world'")

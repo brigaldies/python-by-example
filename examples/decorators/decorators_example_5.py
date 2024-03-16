@@ -9,6 +9,8 @@ import random
 from examples.decorators.plugins import PLUGINS
 from examples.decorators.decorators import register
 
+LOG = logging.getLogger("examples")
+
 
 @register
 def say_hello(name: str) -> str:
@@ -38,7 +40,7 @@ def randomly_greet(name: str) -> str:
     """
     greeter, greeter_func = random.choice(list(PLUGINS.items()))
     greeter_formatted = f"{greeter!r}"
-    logging.info("Using %s", greeter_formatted)
+    LOG.info("Using %s", greeter_formatted)
     return greeter_func(name)
 
 
@@ -48,5 +50,5 @@ def example_5(args: argparse.Namespace) -> None:
     :param args: Command-line arguments.
     :return: None
     """
-    logging.info("Running decorator example 5 (args=%s)", vars(args))
-    logging.info("Greeting: %s", randomly_greet("Bertrand"))
+    LOG.info("Running decorator example 5 (args=%s)", vars(args))
+    LOG.info("Greeting: %s", randomly_greet("Bertrand"))

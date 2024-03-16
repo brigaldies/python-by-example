@@ -8,6 +8,8 @@ import logging
 import math
 from examples.decorators.decorators import debug
 
+LOG = logging.getLogger("examples")
+
 
 def approximate_e(terms=18):
     """
@@ -24,6 +26,6 @@ def example_3(args: argparse.Namespace) -> None:
     :param args: Command-line arguments.
     :return: None
     """
-    logging.info("Running decorator example 3 (args=%s)", vars(args))
+    LOG.info("Running decorator example 3 (args=%s)", vars(args))
     math.factorial = debug(math.factorial)
-    logging.info("Approximated 'e' with %d terms: %f", 5, approximate_e(terms=5))
+    LOG.info("Approximated 'e' with %d terms: %f", 5, approximate_e(terms=5))
