@@ -97,6 +97,8 @@ def interface_with_virtual_base_class() -> None:
     Run the example with virtual base class.
     :return: None.
     """
+    LOG.info("------------------------------------------------------")
+    LOG.info("Running the virtual base class-based interface example")
     person = PersonSuper()
     assert issubclass(person, Person) is True
     LOG.info("PersonSuper MRO: %s", str(PersonSuper.__mro__))

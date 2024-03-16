@@ -71,6 +71,8 @@ def interface_informal() -> None:
     Example of an informal interface.
     :return: None.
     """
+    LOG.info("--------------------------------------")
+    LOG.info("Running the informal interface example")
     pdf_parser = PdfParser()
     assert issubclass(PdfParser, InformalParserInterface) is True
     parsed_pdf = parse(pdf_parser, ".", "data.pdf")

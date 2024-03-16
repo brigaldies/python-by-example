@@ -22,10 +22,19 @@ class ParserMeta(type):
 
 class ParserInterface(metaclass=ParserMeta):
     """This interface is used for concrete classes to inherit from.
-    There is no need to define the ParserMeta methods as any class
+    There is no need to define the ParserMeta methods
     as they are implicitly made available via .__subclasscheck__().
+
+    However, to help my IDE (PyCharm), I declared the interface methods anyway.
     """
-    pass
+
+    def load_data_source(self, path: str, file_name: str) -> str:
+        """ Load data source """
+        pass
+
+    def extract_text(self, data: str) -> dict:
+        """ Extract the text from the data source """
+        pass
 
 
 class PdfParser:
@@ -89,6 +98,8 @@ def interface_with_metaclass() -> None:
     Example of interface implementation with a metaclass.
     :return: None
     """
+    LOG.info("---------------------------------------------")
+    LOG.info("Running the metaclass-based interface example")
     pdf_parser = PdfParser()
     assert issubclass(PdfParser, ParserInterface) is True
     parsed_pdf = parse(pdf_parser, ".", "data.pdf")
