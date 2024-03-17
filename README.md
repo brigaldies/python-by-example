@@ -19,8 +19,9 @@ This repo contains various examples for:
 - SQLAlchemy-based SQL Database access.
 - Interfaces
 
-I built this repo to become a better Python developer by learning by well written Pythonesque examples, and provide (for myself) an inventory of working
-examples I can go back to when I forget how to do something in Python.
+I built this repo to become a better Python programmer by learning from well-written, lint-checked, unit-tested, "
+Pythonic" examples, and provide (for myself) an inventory of working
+examples that I can go back to when I forget how to do something in Python. :-)
 
 ## Code Sources
 
@@ -242,9 +243,7 @@ poetry install sqlalchemy
 
 ## TODO
 
-### __init__.py
-
-### Classes
+### Object-Oriented Programming (OOP)
 
 ### Generics
 
