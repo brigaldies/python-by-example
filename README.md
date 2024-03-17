@@ -7,6 +7,7 @@ This repo contains various examples for:
 - PDM and Poetry-based dependencies management.
 - pipx-based installation of poetry and pylint.
 - pylint-based linting.
+- pytest-based unit tests.
 - Command-line arguments parsing.
 - Logging.
 - Executing ```Callable``` objects.
@@ -16,14 +17,14 @@ This repo contains various examples for:
 - Dash-based Web application.
 - Flask-based API.
 - SQLAlchemy-based SQL Database access.
-- pytest-based unit tests.
+- Interfaces
 
-I built this repo to become a better Python developer, learn by example, and provide a sort of inventory of working
+I built this repo to become a better Python developer by learning by well written Pythonesque examples, and provide (for myself) an inventory of working
 examples I can go back to when I forget how to do something in Python.
 
 ## Code Sources
 
-The code uses and adapts examples and tutorials that I found on the Internet from a variety of sites,
+The code uses and adapts various examples and tutorials that I found on the Internet from a variety of sites,
 hence I do not claim any authorship to any of the source code in this repo.
 
 I strive to indicate the examples' sources in the modules' docstring.
@@ -243,7 +244,7 @@ poetry install sqlalchemy
 
 ### __init__.py
 
-### Object-Oriented and Interface-based Programming
+### Classes
 
 ### Generics
 
