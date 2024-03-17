@@ -2,25 +2,17 @@
 This is the main of the project.
 """
 import argparse
-import importlib
 import sys
 from examples.registry import registry
 from app_logging import setup_logging
 
-
-def register_examples() -> None:
-    """
-    Load the examples' modules in order to register them.
-    :return: None.
-    """
-    # Import the modules so that they can register themselves via the @register_example decorator.
-    # This forced module import is a disadvantage of the decorator-based self-registration mechanism.
-    importlib.import_module("examples.typehints.type_hints_examples")
-    importlib.import_module("examples.async_io.async_io_examples")
-    importlib.import_module("examples.generators.generators_examples")
-    importlib.import_module("examples.decorators.decorators_examples")
-    importlib.import_module("examples.database.database_examples")
-    importlib.import_module("examples.interfaces.interface_examples")
+# Run the examples' __init__.py in order to register them.
+import examples.typehints  # pylint: disable=unused-import
+import examples.async_io  # pylint: disable=unused-import
+import examples.generators  # pylint: disable=unused-import
+import examples.decorators  # pylint: disable=unused-import
+import examples.database  # pylint: disable=unused-import
+import examples.interfaces  # pylint: disable=unused-import
 
 
 def main(cli_args):
@@ -59,8 +51,6 @@ if __name__ == "__main__":
     parser.add_argument("-c", "--ncon", help="In the async io examples: Number of consumers", type=int, default=10)
 
     args = parser.parse_args()
-
-    register_examples()
 
     if args.example == "show":
         print("Examples:")

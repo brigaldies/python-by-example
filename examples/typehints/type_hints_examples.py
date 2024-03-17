@@ -1,19 +1,9 @@
 """
 Type hints examples.
 """
-import argparse
 import logging
-from examples.registry.registry import register_example
 
-
-@register_example
-def type_hints(args: argparse.Namespace) -> None:
-    """
-    Run the type hints examples
-    :return:
-    """
-    type_hints_example(debug=args.debug)
-    generate_greetings(name="bertrand", debug=args.debug)
+LOG = logging.getLogger("examples")
 
 
 def type_hints_example(debug: bool = False) -> None:
@@ -21,7 +11,7 @@ def type_hints_example(debug: bool = False) -> None:
     Examples of type hints
     """
     if debug:
-        logging.info("number: int = 1")
+        LOG.info("number: int = 1")
     number: int = 1
     number += 1
 
@@ -39,5 +29,5 @@ def generate_greetings(name: str, debug: bool = False) -> dict[str, str]:
         "evening": f"Good evening {name}",
     }
     if debug:
-        logging.info("Greetings %s", greetings)
+        LOG.info("Greetings %s", greetings)
     return greetings
