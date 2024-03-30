@@ -194,6 +194,36 @@ pipx install pylint
 pylint **/*.py 
 ```
 
+## Static Types Checking with mypy
+
+### Install
+
+```shell
+poetry add mypy
+```
+
+### Usage
+
+```shell
+mypy **/*.py
+```
+
+### Install Supporting Type "Stubs"
+
+In order to address mypy errors such as:
+
+```shell
+error: Library stubs not installed for "pandas"  [import-untyped]
+```
+
+Install the supporting type stubs:
+
+```shell
+poetry add pandas-stubs
+poetry add types-aiofiles
+poetry add types-requests
+```
+
 ## REST API
 
 ### Install
@@ -242,6 +272,8 @@ poetry install sqlalchemy
 ```
 
 ## TODO
+
+
 
 ### Object-Oriented Programming (OOP)
 

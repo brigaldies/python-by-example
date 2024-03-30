@@ -34,6 +34,10 @@ dash-bootstrap-components = "^1.5.0"
 aiofiles = "^23.2.1"
 aiohttp = "^3.9.3"
 sqlalchemy = "^2.0.28"
+mypy = "^1.9.0"
+pandas-stubs = "^2.2.1.240316"
+types-aiofiles = "^23.2.0.20240311"
+types-requests = "^2.31.0.20240311"
 
 
 [build-system]

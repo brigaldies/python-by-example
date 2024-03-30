@@ -1,5 +1,7 @@
 """
 Plugins registry.
 """
+import argparse
+from typing import Callable
 
-PLUGINS = {}
+PLUGINS: dict[str, Callable[[argparse.Namespace], None]] = {}

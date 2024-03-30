@@ -21,7 +21,14 @@ class PersonMeta(type):
 
 class Person(metaclass=PersonMeta):
     """Person interface built from PersonMeta metaclass."""
-    pass
+
+    def name(self) -> str:
+        """ Person's name """
+        raise NotImplementedError
+
+    def age(self) -> int:
+        """ Person's age"""
+        raise NotImplementedError
 
 
 class PersonSuper:
