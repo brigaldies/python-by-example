@@ -13,6 +13,7 @@ import examples.generators  # pylint: disable=unused-import
 import examples.decorators  # pylint: disable=unused-import
 import examples.database  # pylint: disable=unused-import
 import examples.interfaces  # pylint: disable=unused-import
+import examples.cache  # pylint: disable=unused-import
 
 
 def main(cli_args):

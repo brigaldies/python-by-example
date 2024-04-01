@@ -271,9 +271,36 @@ poetry run python ./apps/web_app/app_with_bootstrap_styling.py
 poetry install sqlalchemy
 ```
 
+## Redis Cache
+
+### Install
+
+```shell
+poetry add redis
+```
+
+### Run the Redis service
+
+```shell
+cd ./examples/cache
+docker compose up
+```
+
+### Redi Cli
+
+Pre-requisite: Install the Redis client
+```shell
+brew install redis
+```
+
+```shell
+redis-cli -h localhost -p 6379
+```
+
+
 ## TODO
 
-
+### Progress bar
 
 ### Object-Oriented Programming (OOP)
 
