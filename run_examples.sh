@@ -3,7 +3,7 @@
 # Error if unbound variable
 set -u
 
-examples=("type_hints" "async_io" "generators" "decorators" "sql_database" "interface")
+examples=("type_hints" "async_io" "generators" "decorators" "sql_database" "interface" "cache")
 
 for i in "${examples[@]}"
 do

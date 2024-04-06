@@ -297,10 +297,23 @@ brew install redis
 redis-cli -h localhost -p 6379
 ```
 
+## Progress Bars
+
+### With tqdm
+
+#### Install
+
+```shell
+poetry install tqdm
+```
+
+### With progressbar2
+
+```shell
+poetry install progressbar2
+```
 
 ## TODO
-
-### Progress bar
 
 ### Object-Oriented Programming (OOP)
 
