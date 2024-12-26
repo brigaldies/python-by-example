@@ -34,7 +34,7 @@ async def part2(n: int, arg: str) -> str:
     """
     Coroutine for part 2.
     :param n: Overall process ID
-    :param arg:
+    :param arg: Part 1's result.
     :return: Part 2's result.
     """
     i = random.randint(0, 10)

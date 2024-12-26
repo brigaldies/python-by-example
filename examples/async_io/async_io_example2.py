@@ -20,7 +20,7 @@ c = (
 
 async def make_random(idx: int, threshold: int = 6) -> int:
     """
-    Coroutine generates a random number obove a threshold.
+    Coroutine generates a random number above a threshold.
     :param idx: Generator ID
     :param threshold: Threshold.
     :return: Random number.
