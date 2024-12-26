@@ -235,7 +235,7 @@ poetry add flask
 ### Run
 
 ```shell
-flask --app ./examples/api/resp_api --debug run
+poetry run flask --app ./apps/api/resp_api --debug run
 ```
 
 ### End-points
@@ -244,7 +244,7 @@ flask --app ./examples/api/resp_api --debug run
 - Add income: Run the Python ```post_income.py``` program as shown below:
 
 ```shell
-poetry run python ./examples/api/post_income.py 
+poetry run python ./apps/api/post_income.py 
 ```
 
 ## Web Application
