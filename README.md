@@ -312,6 +312,13 @@ poetry install tqdm
 ```shell
 poetry install progressbar2
 ```
+## Machine Learning
+
+### Install
+
+```shell
+poetry add numpy
+```
 
 ## TODO
 

@@ -41,6 +41,7 @@ types-requests = "^2.31.0.20240311"
 redis = "^5.0.3"
 tqdm = "^4.66.2"
 progressbar2 = "^4.4.2"
+numpy = "^1.26.4"
 
 
 [build-system]
