@@ -9,6 +9,7 @@ from app_logging import setup_logging
 # Run the examples' __init__.py in order to register them.
 import examples.typehints  # pylint: disable=unused-import
 import examples.async_io  # pylint: disable=unused-import
+import examples.async_iterators  # pylint: disable=unused-import
 import examples.generators  # pylint: disable=unused-import
 import examples.decorators  # pylint: disable=unused-import
 import examples.database  # pylint: disable=unused-import

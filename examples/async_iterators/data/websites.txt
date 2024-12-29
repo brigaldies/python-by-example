@@ -1,0 +1,11 @@
+# List your web sites to scrape.
+# ATTENTION: Web sites with popups or other animations (e.g., videos) will not work.
+https://www.google.com
+https://www.microsoft.com
+https://www.apple.com
+https://www.nytimes.com
+https://www.npr.org
+https://www.stackoverflow.com
+https://www.python.org/
+https://go.dev
+https://github.com
