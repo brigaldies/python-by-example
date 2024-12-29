@@ -165,5 +165,6 @@ cython_debug/
 # Redis databases
 **/*.rdb
 
-# Application-produces files
+# Application-produced files
 **/foundurls.txt
+**/async_iterators/data/*.html
