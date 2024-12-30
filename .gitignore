@@ -168,3 +168,7 @@ cython_debug/
 # Application-produced files
 **/foundurls.txt
 **/async_iterators/data/*.html
+
+# CA and keys
+**/*.key
+**/*.pem

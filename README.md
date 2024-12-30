@@ -18,6 +18,7 @@ This repo contains various examples for:
 - Flask-based API.
 - SQLAlchemy-based SQL Database access.
 - Interfaces
+- TLS-secured gRPC-based microservices.
 
 I built this repo to become a better Python programmer by learning from well-written, lint-checked, unit-tested, "
 Pythonic" examples, and provide (for myself) an inventory of working
@@ -124,6 +125,7 @@ pdm run jupyter notebook
 - api
 - web_app
 - web_crawler
+- gRPC-based microservices
 
 The above apps use the ```app_logging``` module, hence add the Dash's application location to PYTHONPATH before running
 them, for example:
@@ -131,6 +133,60 @@ them, for example:
 ```shell
 -> % export PYTHONPATH="${PYTHONPATH}:/Users/bertrandrigaldies/Projects/python-by-example"
 ```
+
+### gRPC-based microservice
+
+The gRPC examples were the results of doing a code-along of [this tutorial](https://realpython.com/python-microservices-grpc/)
+
+#### gRPC protobuf bindings generation
+
+To generate the protobuf bindings, and run the client and recommendations server by hand (outside of Docker):
+
+For the server:
+```shell
+cd apps/grpc/recommendations
+python -m grpc_tools.protoc -I ../protobufs --python_out=. \
+         --grpc_python_out=. ../protobufs/recommendations.proto
+```
+
+For the Web server:
+```shell
+cd apps/grpc/marketplace
+python -m grpc_tools.protoc -I ../protobufs --python_out=. \
+         --grpc_python_out=. ../protobufs/recommendations.proto
+```
+
+When running in Docker, the protobuf bindings are generated as part of the Docker image builds for both the client and recommendations server.
+See the next section for the instructions on how to run the demo in Docker with ```docker-compose```.
+
+#### Docker-based Execution
+
+Build the Docker images for the client and recommendations server as shown below (see also the second comment line at the top of the Docker files):
+
+1. Build the client's CA and TLS public key
+```shell
+openssl req -x509 -nodes -newkey rsa:4096 -keyout ca.key -out ca.pem -subj /O=me
+```
+
+2. Build the client's Docker image
+```shell
+DOCKER_BUILDKIT=1 docker build . -f marketplace/Dockerfile -t marketplace --secret id=ca.key,src=ca.key
+```
+
+3. Build the recommendations server's Docker image
+```shell
+DOCKER_BUILDKIT=1 docker build . -f recommendations/Dockerfile -t recommendations --secret id=ca.key,src=ca.key
+```
+
+Run the dockerized demo with `docker-compose` as shown below:
+
+```shell
+docker-compose up
+```
+
+Shut down the application as shown below from the terminal where the demo was started (see above):
+1. Ctrl-C
+2. `docker-compose down`
 
 ## Logging setup to stdout and log file
 
