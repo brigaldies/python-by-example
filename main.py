@@ -18,6 +18,7 @@ import examples.cache  # pylint: disable=unused-import
 import examples.progress_bar  # pylint: disable=unused-import
 import examples.closure  # pylint: disable=unused-import
 import examples.timers  # pylint: disable=unused-import
+import examples.optimization  # pylint: disable=unused-import
 
 
 def main(cli_args):
